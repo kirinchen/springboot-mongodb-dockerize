@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  mongodbdemo:
+    build:
+        context: ./mongodbdemo/
+        dockerfile: Dockerfile
+    ports: 
+      - "8080:8080"
+    depends_on:
+      - "mongodb"      
+  mongodb:
+    image: mongo:3.4.2
+    environment:
+       - MONGO_INITDB_ROOT_USERNAME=root
+       - MONGO_INITDB_ROOT_PASSWORD=root
+       - MONGO_INITDB_DATABASE=bzklog       
+    ports: 
+      - "27017:27017"   
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 2048M 
